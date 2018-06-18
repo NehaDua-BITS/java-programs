@@ -1,3 +1,8 @@
+#intellij files
+.idea/
+out/
+*.iml
+
 # Prerequisites
 *.d
 
