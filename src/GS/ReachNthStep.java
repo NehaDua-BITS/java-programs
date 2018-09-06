@@ -18,10 +18,10 @@ public class ReachNthStep{
         else if (n < 0)
             return 0;
 
-        else
-            return findStep(n - 3) +
-                    findStep(n - 2) +
-                    findStep(n - 1);
+
+        return findStep(n - 3) +
+                findStep(n - 2) +
+                findStep(n - 1);
     }
 
     //using DP
@@ -33,9 +33,26 @@ public class ReachNthStep{
         dp[2] = 2;
 
         for (int i = 3; i <=n ; i++)
-            dp[i] = dp[n-1] + dp[n-2] + dp[n-3];
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
 
         return dp[n];
+    }
+
+    public static int countWays(int n, int m)
+    {
+        int[] result = new int[n+1];
+        result[0] = 1;
+        result[1] = 1;
+
+        for (int i = 2; i <= n; i++)
+        {
+            for (int j = 1; j <=m && j <= i; j++)
+            {
+                result[i] += result[i-j];
+            }
+        }
+
+        return result[n];
     }
 
     // Driver function
@@ -44,6 +61,7 @@ public class ReachNthStep{
         System.out.println(findStep(n));
         System.out.println("By DP : " + findStepDP(n));
 
+        System.out.println("by dp 2 : "+  countWays(n, 3));
     }
 }
 
